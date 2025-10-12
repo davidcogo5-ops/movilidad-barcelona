@@ -1,5 +1,10 @@
 # 🌍 Movilidad Urbana en Barcelona
 
+![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-blue?logo=github&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+
 Un proyecto digital minimalista desarrollado para analizar, comunicar y proponer soluciones sostenibles de movilidad en la ciudad de Barcelona.
 
 ---
@@ -14,7 +19,7 @@ A través de una interfaz web limpia y moderna, el usuario puede visualizar la i
 
 ## ⚙️ Estructura del proyecto
 
-El sitio está compuesto por una sola página (Single Page Application) con navegación interna suave, organizada de la siguiente manera:
+El sitio es una **Single Page Application** con navegación interna suave:
 
 1. **Inicio** → Presentación del proyecto.  
 2. **Datos** → Visualización de cifras sobre transporte público, movilidad sostenible y vehículos privados.  
@@ -24,8 +29,6 @@ El sitio está compuesto por una sola página (Single Page Application) con nave
 ---
 
 ## 🧩 Metodología de desarrollo — *Scrum*
-
-El desarrollo del proyecto se organizó en **cinco Sprints**, cada uno con entregables claros y revisiones iterativas:
 
 | Sprint | Objetivo | Entregables |
 |:------:|-----------|-------------|
@@ -39,31 +42,28 @@ El desarrollo del proyecto se organizó en **cinco Sprints**, cada uno con entre
 
 ## 💻 Tecnologías utilizadas
 
-- **HTML5**  
-- **CSS3** (Diseño responsive y minimalista)  
-- **JavaScript** (Interactividad ligera)  
-- **GitHub Pages** (Despliegue gratuito en la web)
+- 🟧 **HTML5**  
+- 🟦 **CSS3** (Diseño responsive y minimalista)  
+- 🟨 **JavaScript** (Interactividad ligera)  
+- 🌐 **GitHub Pages** (Despliegue gratuito en la web)
 
 ---
 
 ## 👥 Equipo de desarrollo
 
 - **David Leonardo Cortés González** — Coordinador y Desarrollador principal  
-- **[Nombre del segundo integrante]** — Colaborador y Diseñador de contenido  
-
-*(Agrega el nombre de tu compañero aquí para completar el equipo.)*
+- **Jaqueline Caballero** — Colaboradora y Diseñadora de contenido
 
 ---
 
 ## 🌐 Enlace al sitio web
 
-🔗 [Ver la página en línea](https://TU-USUARIO.github.io/movilidad-barcelona)
-
-*(Reemplaza “TU-USUARIO” con tu nombre de usuario de GitHub cuando publiques el sitio.)*
+🔗 [Ver la página en línea](https://davidcogo5-ops.github.io/movilidad-barcelona)
 
 ---
 
 ## 📄 Licencia
 
 Este proyecto es de uso educativo y libre para fines de aprendizaje, sin fines comerciales.  
+
 © 2025 — Proyecto académico de movilidad sostenible.
