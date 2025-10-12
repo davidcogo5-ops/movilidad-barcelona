@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Movilidad Urbana en Barcelona</title>
+
+  <!-- Estilos minimalistas -->
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: rgba(0,0,0,0.7);
+      --accent: #0077ff;
+      --card-border: #e5e7eb;
+      --glass: rgba(255,255,255,0.9);
+      --radius: 10px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Reset ligero */
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* --- MENÚ SUPERIOR --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 1.25rem;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* Logo a la izquierda, enlaces a la derecha en pantallas grandes */
+    .brand {
+      margin-right: auto;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--accent);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    /* CTA destacado en menú (opcional) */
+    nav .cta-small {
+      padding: 8px 12px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 0.5rem;
+    }
+
+    nav .cta-small:hover { background: #005fd6; }
+
+    main {
+      padding-top: 5rem; /* espacio por header fijo */
+      text-align: center;
+      padding: 2rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 12px;
+      line-height: 1.05;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    a.cta {
+      display: inline-block;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.18s ease, transform 0.12s ease;
+    }
+
+    a.cta:hover {
+      background: #005fd6;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 3rem 1rem;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* -----------------------
+       SECCIÓN CONTACTO (Sprint 4)
+       ----------------------- */
+    .contact-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .contact-info {
+      padding: 1.5rem;
+    }
+
+    .contact-info h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    form.contact-form {
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: rgba(0,0,0,0.6);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 10px 12px;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: var(--fg);
+      resize: vertical;
+      min-height: 40px;
+      transition: border-color .12s ease, box-shadow .12s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,119,255,0.08);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background .12s ease, transform .08s ease;
+    }
+
+    button[type="submit"]:hover { background: #005fd6; transform: translateY(-2px); }
+
+    button[type="reset"] {
+      padding: 8px 12px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Mobile: apilar y ajustar */
+    @media (max-width: 880px) {
+      .contact-wrap { grid-template-columns: 1fr; padding: 0.5rem; }
+      nav { gap: 1rem; padding: 0.8rem 1rem; }
+      .brand { font-size: 0.95rem; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.55);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* pequeñas ayudas de accesibilidad */
+    a, button { cursor: pointer; }
+    input, textarea { font-family: inherit; }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENÚ SUPERIOR -->
+  <header>
+    <nav>
+      <a class="brand" href="#inicio">Movilidad BCN</a>
+      <a href="#inicio">Inicio</a>
+      <a href="#datos">Datos</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#contacto">Contacto</a>
+      <a class="cta-small" href="#contacto">Contáctanos</a>
+    </nav>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL -->
+  <main id="inicio" aria-labelledby="titulo-principal">
+    <div class="container">
+      <h1 id="titulo-principal">Movilidad Urbana en Barcelona</h1>
+      <p class="lead">
+        Un proyecto para analizar, comunicar y proponer soluciones de movilidad sostenible
+        que mejoren la calidad de vida en la ciudad.
+      </p>
+      <a href="#datos" class="cta" aria-label="Explorar datos">Explorar datos</a>
+    </div>
+  </main>
+
+  <!-- SECCIÓN DE DATOS -->
+  <section id="datos" style="background:#f9fafb;">
+    <h2>Datos de Movilidad en Barcelona</h2>
+
+    <div class="grid" role="list">
+      <article class="card" role="listitem" aria-labelledby="t1">
+        <h3 id="t1">🚇 Transporte Público</h3>
+        <p>El 67 % de los desplazamientos diarios se realizan en metro, bus o tranvía.</p>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="t2">
+        <h3 id="t2">🚴 Movilidad Sostenible</h3>
+        <p>El uso de bicicleta y patinete ha crecido un 45 % desde 2020.</p>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="t3">
+        <h3 id="t3">🚗 Vehículo Privado</h3>
+        <p>El tráfico privado se ha reducido en un 22 % en las zonas centrales.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE OBJETIVOS -->
+  <section id="objetivos">
+    <h2>Objetivos del Proyecto</h2>
+
+    <div class="grid" role="list">
+      <article class="card" role="listitem" aria-labelledby="o1">
+        <h3 id="o1">🌱 Sostenibilidad</h3>
+        <p>Promover hábitos de transporte ecológicos y reducir la huella de carbono urbana.</p>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="o2">
+        <h3 id="o2">📊 Análisis de Datos</h3>
+        <p>Utilizar información en tiempo real para mejorar la planificación y gestión del tráfico.</p>
+      </article>
+
+      <article class="card" role="listitem" aria-labelledby="o3">
+        <h3 id="o3">🤝 Comunidad</h3>
+        <p>Fomentar la participación ciudadana en la toma de decisiones sobre movilidad.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE CONTACTO (Sprint 4) -->
+  <section id="contacto" aria-labelledby="contacto-title">
+    <h2 id="contacto-title">Contacto</h2>
+
+    <div class="contact-wrap">
+      <div class="contact-info" aria-hidden="false">
+        <h3>¿Tienes sugerencias o datos para compartir?</h3>
+        <p>
+          Usa este formulario para enviarnos observaciones, propuestas de mejora o datos relevantes
+          sobre movilidad en Barcelona. Responderemos a la brevedad.
+        </p>
+        <p style="font-size:.95rem;color:var(--muted)">Tiempo de respuesta estimado: 3-5 días laborables.</p>
+      </div>
+
+      <form class="contact-form" action="#" method="POST" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" />
+        </div>
+
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required aria-required="true" />
+        </div>
+
+        <div class="field">
+          <label for="asunto">Asunto</label>
+          <input type="text" id="asunto" name="asunto" placeholder="Asunto breve" />
+        </div>
+
+        <div class="field">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje..." required aria-required="true"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="reset" aria-label="Limpiar formulario">Limpiar</button>
+          <button type="submit" aria-label="Enviar mensaje">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> Proyecto de Movilidad — Hecho con metodología Scrum
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    // Año dinámico
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mejora mínima: validación de formulario (cliente) y feedback simple
+    (function(){
+      const form = document.querySelector('.contact-form');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        // validación sencilla
+        const nombre = form.nombre.value.trim();
+        const email = form.email.value.trim();
+        const mensaje = form.mensaje.value.trim();
+
+        if(!nombre || !email || !mensaje){
+          alert('Por favor completa los campos requeridos: nombre, correo y mensaje.');
+          return;
+        }
+
+        // Aquí podrías integrar fetch() a tu endpoint o servicio de email.
+        // Por ahora simulamos envío y limpiamos el formulario.
+        alert('Gracias — tu mensaje ha sido recibido. Pronto nos pondremos en contacto.');
+        form.reset();
+        // opcional: navegar a inicio o añadir foco
+        // window.location.hash = '#inicio';
+      });
+    })();
+  </script>
+</body>
+</html>
