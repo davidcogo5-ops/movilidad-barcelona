@@ -18,7 +18,6 @@
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    /* Reset ligero */
     * { box-sizing: border-box; }
 
     body {
@@ -26,11 +25,10 @@
       background: var(--bg);
       color: var(--fg);
       scroll-behavior: smooth;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* --- MENÚ SUPERIOR --- */
     header {
       position: fixed;
       top: 0;
@@ -52,7 +50,6 @@
       width: 100%;
     }
 
-    /* Logo a la izquierda, enlaces a la derecha en pantallas grandes */
     .brand {
       margin-right: auto;
       font-weight: 700;
@@ -75,7 +72,6 @@
       outline: none;
     }
 
-    /* CTA destacado en menú (opcional) */
     nav .cta-small {
       padding: 8px 12px;
       background: var(--accent);
@@ -89,7 +85,7 @@
     nav .cta-small:hover { background: #005fd6; }
 
     main {
-      padding-top: 5rem; /* espacio por header fijo */
+      padding-top: 5rem;
       text-align: center;
       padding: 2rem 1rem;
       max-width: 1100px;
@@ -159,9 +155,30 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
-    /* -----------------------
-       SECCIÓN CONTACTO (Sprint 4)
-       ----------------------- */
+    /* Iframe responsivo */
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding-bottom: 62.5%; /* relación 16:10 aprox */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    /* Contacto */
     .contact-wrap {
       max-width: 900px;
       margin: 0 auto;
@@ -172,14 +189,9 @@
       padding: 1rem;
     }
 
-    .contact-info {
-      padding: 1.5rem;
-    }
+    .contact-info { padding: 1.5rem; }
 
-    .contact-info h3 {
-      margin-top: 0;
-      color: var(--accent);
-    }
+    .contact-info h3 { margin-top: 0; color: var(--accent); }
 
     .contact-info p {
       color: var(--muted);
@@ -256,11 +268,11 @@
       cursor: pointer;
     }
 
-    /* Mobile: apilar y ajustar */
     @media (max-width: 880px) {
       .contact-wrap { grid-template-columns: 1fr; padding: 0.5rem; }
       nav { gap: 1rem; padding: 0.8rem 1rem; }
       .brand { font-size: 0.95rem; }
+      .iframe-container { padding-bottom: 85%; } /* más alto en móviles */
     }
 
     footer {
@@ -271,15 +283,12 @@
       border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
 
-    /* pequeñas ayudas de accesibilidad */
     a, button { cursor: pointer; }
     input, textarea { font-family: inherit; }
   </style>
 </head>
 
 <body>
-
-  <!-- MENÚ SUPERIOR -->
   <header>
     <nav>
       <a class="brand" href="#inicio">Movilidad BCN</a>
@@ -291,7 +300,6 @@
     </nav>
   </header>
 
-  <!-- SECCIÓN PRINCIPAL -->
   <main id="inicio" aria-labelledby="titulo-principal">
     <div class="container">
       <h1 id="titulo-principal">Movilidad Urbana en Barcelona</h1>
@@ -306,6 +314,16 @@
   <!-- SECCIÓN DE DATOS -->
   <section id="datos" style="background:#f9fafb;">
     <h2>Datos de Movilidad en Barcelona</h2>
+
+    <!-- Dashboard de Looker Studio -->
+    <div class="iframe-container">
+      <iframe 
+        src="https://lookerstudio.google.com/embed/reporting/5d86781f-afb5-4ff3-b041-359be27fa355/page/p_a74xwp5fxd"
+        allowfullscreen
+        frameborder="0"
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+    </div>
 
     <div class="grid" role="list">
       <article class="card" role="listitem" aria-labelledby="t1">
@@ -347,12 +365,12 @@
     </div>
   </section>
 
-  <!-- SECCIÓN DE CONTACTO (Sprint 4) -->
+  <!-- CONTACTO -->
   <section id="contacto" aria-labelledby="contacto-title">
     <h2 id="contacto-title">Contacto</h2>
 
     <div class="contact-wrap">
-      <div class="contact-info" aria-hidden="false">
+      <div class="contact-info">
         <h3>¿Tienes sugerencias o datos para compartir?</h3>
         <p>
           Usa este formulario para enviarnos observaciones, propuestas de mejora o datos relevantes
@@ -383,29 +401,24 @@
         </div>
 
         <div class="actions">
-          <button type="reset" aria-label="Limpiar formulario">Limpiar</button>
-          <button type="submit" aria-label="Enviar mensaje">Enviar</button>
+          <button type="reset">Limpiar</button>
+          <button type="submit">Enviar</button>
         </div>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © <span id="year"></span> Proyecto de Movilidad — Hecho con metodología Scrum
   </footer>
 
-  <!-- SCRIPT -->
   <script>
-    // Año dinámico
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Mejora mínima: validación de formulario (cliente) y feedback simple
     (function(){
       const form = document.querySelector('.contact-form');
       form.addEventListener('submit', function(e){
         e.preventDefault();
-        // validación sencilla
         const nombre = form.nombre.value.trim();
         const email = form.email.value.trim();
         const mensaje = form.mensaje.value.trim();
@@ -415,12 +428,8 @@
           return;
         }
 
-        // Aquí podrías integrar fetch() a tu endpoint o servicio de email.
-        // Por ahora simulamos envío y limpiamos el formulario.
         alert('Gracias — tu mensaje ha sido recibido. Pronto nos pondremos en contacto.');
         form.reset();
-        // opcional: navegar a inicio o añadir foco
-        // window.location.hash = '#inicio';
       });
     })();
   </script>
