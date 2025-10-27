@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Movilidad Urbana en Barcelona</title>
 
-  <!-- Estilos minimalistas -->
   <style>
     :root {
       --bg: #ffffff;
       --fg: #111111;
       --muted: rgba(0,0,0,0.7);
-      --accent: #0077ff;
+      --accent: #1d4ed8;
       --card-border: #e5e7eb;
-      --glass: rgba(255,255,255,0.9);
       --radius: 10px;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
@@ -29,11 +27,12 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* MENÚ SUPERIOR */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: var(--glass);
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
@@ -79,10 +78,9 @@
       border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
-      margin-left: 0.5rem;
     }
 
-    nav .cta-small:hover { background: #005fd6; }
+    nav .cta-small:hover { background: #0b3ebd; }
 
     main {
       padding-top: 5rem;
@@ -119,7 +117,7 @@
     }
 
     a.cta:hover {
-      background: #005fd6;
+      background: #0b3ebd;
       transform: translateY(-2px);
     }
 
@@ -127,17 +125,44 @@
       padding: 3rem 1rem;
     }
 
-    h2 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+    /* =======================
+       SECCIÓN DE DATOS
+    ======================= */
+    .iframe-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding-top: 56.25%; /* relación 16:9 */
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      background: #fff;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 12px;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .grid {
       display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      max-width: 900px;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -147,38 +172,27 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       text-align: center;
-      transition: all 0.25s ease-in-out;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
-    /* Iframe responsivo */
-    .iframe-container {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding-bottom: 62.5%; /* relación 16:10 aprox */
-      height: 0;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    .card h3 {
+      font-size: 1.15rem;
+      color: #111;
+      margin-bottom: 0.6rem;
     }
 
-    .iframe-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      border-radius: 10px;
+    .card p {
+      color: #444;
+      line-height: 1.6;
     }
 
-    /* Contacto */
+    /* CONTACTO */
     .contact-wrap {
       max-width: 900px;
       margin: 0 auto;
@@ -189,9 +203,14 @@
       padding: 1rem;
     }
 
-    .contact-info { padding: 1.5rem; }
+    .contact-info {
+      padding: 1.5rem;
+    }
 
-    .contact-info h3 { margin-top: 0; color: var(--accent); }
+    .contact-info h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
 
     .contact-info p {
       color: var(--muted);
@@ -235,7 +254,7 @@
     input:focus, textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,119,255,0.08);
+      box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
     }
 
     .actions {
@@ -257,7 +276,7 @@
       transition: background .12s ease, transform .08s ease;
     }
 
-    button[type="submit"]:hover { background: #005fd6; transform: translateY(-2px); }
+    button[type="submit"]:hover { background: #0b3ebd; transform: translateY(-2px); }
 
     button[type="reset"] {
       padding: 8px 12px;
@@ -268,19 +287,19 @@
       cursor: pointer;
     }
 
-    @media (max-width: 880px) {
-      .contact-wrap { grid-template-columns: 1fr; padding: 0.5rem; }
-      nav { gap: 1rem; padding: 0.8rem 1rem; }
-      .brand { font-size: 0.95rem; }
-      .iframe-container { padding-bottom: 85%; } /* más alto en móviles */
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
       color: rgba(0, 0, 0, 0.55);
       border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 880px) {
+      .contact-wrap { grid-template-columns: 1fr; padding: 0.5rem; }
+      nav { gap: 1rem; padding: 0.8rem 1rem; }
+      .brand { font-size: 0.95rem; }
     }
 
     a, button { cursor: pointer; }
@@ -289,6 +308,7 @@
 </head>
 
 <body>
+  <!-- MENÚ -->
   <header>
     <nav>
       <a class="brand" href="#inicio">Movilidad BCN</a>
@@ -300,81 +320,95 @@
     </nav>
   </header>
 
-  <main id="inicio" aria-labelledby="titulo-principal">
-    <div class="container">
-      <h1 id="titulo-principal">Movilidad Urbana en Barcelona</h1>
-      <p class="lead">
-        Un proyecto para analizar, comunicar y proponer soluciones de movilidad sostenible
-        que mejoren la calidad de vida en la ciudad.
-      </p>
-      <a href="#datos" class="cta" aria-label="Explorar datos">Explorar datos</a>
-    </div>
+  <!-- INICIO -->
+  <main id="inicio">
+    <h1>Movilidad Urbana en Barcelona</h1>
+    <p class="lead">
+      Un proyecto para analizar, comunicar y proponer soluciones de movilidad sostenible
+      que mejoren la calidad de vida en la ciudad.
+    </p>
+    <a href="#datos" class="cta">Explorar datos</a>
   </main>
 
-  <!-- SECCIÓN DE DATOS -->
-  <section id="datos" style="background:#f9fafb;">
-    <h2>Datos de Movilidad en Barcelona</h2>
+  <!-- DATOS -->
+  <section id="datos" style="background:#f9fafb;padding:4rem 1rem;">
+    <h2 style="text-align:center;color:#1d4ed8;font-size:2rem;margin-bottom:1rem;">
+      Datos de Movilidad en Barcelona
+    </h2>
 
-    <!-- Dashboard de Looker Studio -->
-    <div class="iframe-container">
+    <p style="max-width:800px;margin:0 auto 2rem auto;text-align:center;color:#444;font-size:1.05rem;line-height:1.6;">
+      Este panel interactivo muestra información clave sobre calidad del aire en Barcelona, transporte público, movilidad sostenible
+      y uso del vehículo privado en la ciudad de Barcelona.
+    </p>
+
+    <div class="iframe-wrapper fade-in">
       <iframe 
         src="https://lookerstudio.google.com/embed/reporting/5d86781f-afb5-4ff3-b041-359be27fa355/page/p_a74xwp5fxd"
-        allowfullscreen
         frameborder="0"
+        allowfullscreen
         sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
       </iframe>
     </div>
 
-    <div class="grid" role="list">
-      <article class="card" role="listitem" aria-labelledby="t1">
-        <h3 id="t1">🚇 Transporte Público</h3>
-        <p>El 67 % de los desplazamientos diarios se realizan en metro, bus o tranvía.</p>
+    <div class="grid" role="list" style="margin-top:3rem;">
+      <article class="card" role="listitem">
+        <h3>🚇 <strong>Transporte Público</strong></h3>
+        <p>El metro, bus y tranvía representan cerca del <strong>65 %</strong> de los desplazamientos diarios, 
+        mostrando una recuperación sostenida tras la pandemia.</p>
       </article>
 
-      <article class="card" role="listitem" aria-labelledby="t2">
-        <h3 id="t2">🚴 Movilidad Sostenible</h3>
-        <p>El uso de bicicleta y patinete ha crecido un 45 % desde 2020.</p>
+      <article class="card" role="listitem">
+        <h3>🚴 <strong>Movilidad Sostenible</strong></h3>
+        <p>El uso de bicicleta y caminar continúa al alza, con un crecimiento del <strong>50 %</strong> 
+        desde 2020 impulsado por nuevas infraestructuras ciclistas y mejora de calles.</p>
       </article>
 
-      <article class="card" role="listitem" aria-labelledby="t3">
-        <h3 id="t3">🚗 Vehículo Privado</h3>
-        <p>El tráfico privado se ha reducido en un 22 % en las zonas centrales.</p>
+      <article class="card" role="listitem">
+        <h3>🚗 <strong>Vehículo Privado</strong></h3>
+        <p>La circulación de vehículos privados ha disminuido un <strong>20 %</strong> en las zonas céntricas, 
+        gracias a políticas de restricción y promoción del transporte público.</p>
       </article>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="#inicio" 
+         style="display:inline-block;color:#2563eb;text-decoration:none;font-weight:500;
+                padding:0.6rem 1.2rem;border:1px solid #2563eb;border-radius:8px;transition:all 0.3s ease;">
+        ↑ Volver al inicio
+      </a>
     </div>
   </section>
 
-  <!-- SECCIÓN DE OBJETIVOS -->
+  <!-- OBJETIVOS -->
   <section id="objetivos">
     <h2>Objetivos del Proyecto</h2>
-
-    <div class="grid" role="list">
-      <article class="card" role="listitem" aria-labelledby="o1">
-        <h3 id="o1">🌱 Sostenibilidad</h3>
+    <div class="grid">
+      <article class="card">
+        <h3>🌱 Sostenibilidad</h3>
         <p>Promover hábitos de transporte ecológicos y reducir la huella de carbono urbana.</p>
       </article>
 
-      <article class="card" role="listitem" aria-labelledby="o2">
-        <h3 id="o2">📊 Análisis de Datos</h3>
+      <article class="card">
+        <h3>📊 Análisis de Datos</h3>
         <p>Utilizar información en tiempo real para mejorar la planificación y gestión del tráfico.</p>
       </article>
 
-      <article class="card" role="listitem" aria-labelledby="o3">
-        <h3 id="o3">🤝 Comunidad</h3>
+      <article class="card">
+        <h3>🤝 Comunidad</h3>
         <p>Fomentar la participación ciudadana en la toma de decisiones sobre movilidad.</p>
       </article>
     </div>
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" aria-labelledby="contacto-title">
-    <h2 id="contacto-title">Contacto</h2>
-
+  <section id="contacto">
+    <h2>Contacto</h2>
     <div class="contact-wrap">
       <div class="contact-info">
         <h3>¿Tienes sugerencias o datos para compartir?</h3>
         <p>
-          Usa este formulario para enviarnos observaciones, propuestas de mejora o datos relevantes
-          sobre movilidad en Barcelona. Responderemos a la brevedad.
+          Usa este formulario para enviarnos observaciones, propuestas o datos relevantes
+          sobre movilidad en Barcelona.
         </p>
         <p style="font-size:.95rem;color:var(--muted)">Tiempo de respuesta estimado: 3-5 días laborables.</p>
       </div>
@@ -382,24 +416,16 @@
       <form class="contact-form" action="#" method="POST" novalidate>
         <div class="field">
           <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" />
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
         </div>
-
         <div class="field">
           <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required aria-required="true" />
+          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
         </div>
-
-        <div class="field">
-          <label for="asunto">Asunto</label>
-          <input type="text" id="asunto" name="asunto" placeholder="Asunto breve" />
-        </div>
-
         <div class="field">
           <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje..." required aria-required="true"></textarea>
+          <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje..." required></textarea>
         </div>
-
         <div class="actions">
           <button type="reset">Limpiar</button>
           <button type="submit">Enviar</button>
@@ -409,29 +435,25 @@
   </section>
 
   <footer>
-    © <span id="year"></span> Proyecto de Movilidad — Hecho con metodología Scrum
+    © <span id="year"></span> Proyecto de Movilidad — Fuente de datos: Open Data, Kaggle, Ayuntamiento de Barcelona, TMB y Bicing. | Desarrollado por <strong>David Cortés</strong>.
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    (function(){
-      const form = document.querySelector('.contact-form');
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const nombre = form.nombre.value.trim();
-        const email = form.email.value.trim();
-        const mensaje = form.mensaje.value.trim();
-
-        if(!nombre || !email || !mensaje){
-          alert('Por favor completa los campos requeridos: nombre, correo y mensaje.');
-          return;
-        }
-
-        alert('Gracias — tu mensaje ha sido recibido. Pronto nos pondremos en contacto.');
-        form.reset();
-      });
-    })();
+    // Efecto fade-in del dashboard
+    document.addEventListener('DOMContentLoaded', () => {
+      const iframeContainer = document.querySelector('.iframe-wrapper');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            iframeContainer.classList.add('visible');
+            observer.unobserve(iframeContainer);
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(iframeContainer);
+    });
   </script>
 </body>
 </html>
