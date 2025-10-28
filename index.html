@@ -1,4 +1,4 @@
-l<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -27,7 +27,6 @@ l<!doctype html>
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* MENÚ SUPERIOR */
     header {
       position: fixed;
       top: 0;
@@ -125,16 +124,13 @@ l<!doctype html>
       padding: 3rem 1rem;
     }
 
-    /* =======================
-       SECCIÓN DE DATOS
-    ======================= */
     .iframe-wrapper {
       position: relative;
       overflow: hidden;
       width: 100%;
       max-width: 1000px;
       margin: 2rem auto;
-      padding-top: 56.25%; /* relación 16:9 */
+      padding-top: 56.25%;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       background: #fff;
@@ -181,112 +177,6 @@ l<!doctype html>
       box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
 
-    .card h3 {
-      font-size: 1.15rem;
-      color: #111;
-      margin-bottom: 0.6rem;
-    }
-
-    .card p {
-      color: #444;
-      line-height: 1.6;
-    }
-
-    /* CONTACTO */
-    .contact-wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 1rem;
-    }
-
-    .contact-info {
-      padding: 1.5rem;
-    }
-
-    .contact-info h3 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-
-    .contact-info p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      text-align: left;
-    }
-
-    form.contact-form {
-      background: #fff;
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    label {
-      font-size: 0.9rem;
-      color: rgba(0,0,0,0.6);
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      padding: 10px 12px;
-      border: 1px solid #e6e6e6;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      color: var(--fg);
-      resize: vertical;
-      min-height: 40px;
-      transition: border-color .12s ease, box-shadow .12s ease;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 8px;
-    }
-
-    button[type="submit"] {
-      padding: 10px 16px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background .12s ease, transform .08s ease;
-    }
-
-    button[type="submit"]:hover { background: #0b3ebd; transform: translateY(-2px); }
-
-    button[type="reset"] {
-      padding: 8px 12px;
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid transparent;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -297,18 +187,15 @@ l<!doctype html>
     }
 
     @media (max-width: 880px) {
-      .contact-wrap { grid-template-columns: 1fr; padding: 0.5rem; }
       nav { gap: 1rem; padding: 0.8rem 1rem; }
       .brand { font-size: 0.95rem; }
     }
 
     a, button { cursor: pointer; }
-    input, textarea { font-family: inherit; }
   </style>
 </head>
 
 <body>
-  <!-- MENÚ -->
   <header>
     <nav>
       <a class="brand" href="#inicio">Movilidad BCN</a>
@@ -320,7 +207,6 @@ l<!doctype html>
     </nav>
   </header>
 
-  <!-- INICIO -->
   <main id="inicio">
     <h1>Movilidad Urbana en Barcelona</h1>
     <p class="lead">
@@ -330,59 +216,44 @@ l<!doctype html>
     <a href="#datos" class="cta">Explorar datos</a>
   </main>
 
-  <!-- DATOS -->
   <section id="datos" style="background:#f9fafb;padding:4rem 1rem;">
     <h2 style="text-align:center;color:#1d4ed8;font-size:2rem;margin-bottom:1rem;">
       Datos de Movilidad en Barcelona
     </h2>
 
     <p style="max-width:800px;margin:0 auto 2rem auto;text-align:center;color:#444;font-size:1.05rem;line-height:1.6;">
-      Este panel interactivo muestra información clave sobre calidad del aire en Barcelona, transporte público, movilidad sostenible
-      y uso del vehículo privado en la ciudad de Barcelona.
+      Este panel interactivo muestra información clave sobre calidad del aire, transporte público,
+      movilidad sostenible y uso del vehículo privado en la ciudad.
     </p>
 
     <div class="iframe-wrapper fade-in">
-     <iframe 
-  width="100%" 
-  height="800" 
-  src="https://lookerstudio.google.com/embed/reporting/5d86781f-afb5-4ff3-b041-359be27fa355"
-  frameborder="0"
-  style="border:0;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.08);"
-  allowfullscreen
-  sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-</iframe>
+      <iframe 
+        width="100%" 
+        height="800" 
+        src="https://lookerstudio.google.com/embed/reporting/5d86781f-afb5-4ff3-b041-359be27fa355"
+        frameborder="0"
+        style="border:0;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.08);"
+        allowfullscreen
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
     </div>
 
-    <div class="grid" role="list" style="margin-top:3rem;">
-      <article class="card" role="listitem">
-        <h3>🚇 <strong>Transporte Público</strong></h3>
-        <p>El metro, bus y tranvía representan cerca del <strong>65 %</strong> de los desplazamientos diarios, 
-        mostrando una recuperación sostenida tras la pandemia.</p>
+    <div class="grid" style="margin-top:3rem;">
+      <article class="card">
+        <h3>🚇 Transporte Público</h3>
+        <p>El transporte público representa cerca del <strong>65 %</strong> de los desplazamientos diarios.</p>
       </article>
-
-      <article class="card" role="listitem">
-        <h3>🚴 <strong>Movilidad Sostenible</strong></h3>
-        <p>El uso de bicicleta y caminar continúa al alza, con un crecimiento del <strong>50 %</strong> 
-        desde 2020 impulsado por nuevas infraestructuras ciclistas y mejora de calles.</p>
+      <article class="card">
+        <h3>🚴 Movilidad Sostenible</h3>
+        <p>El uso de bicicletas y caminatas ha aumentado un <strong>50 %</strong> desde 2020.</p>
       </article>
-
-      <article class="card" role="listitem">
-        <h3>🚗 <strong>Vehículo Privado</strong></h3>
-        <p>La circulación de vehículos privados ha disminuido un <strong>20 %</strong> en las zonas céntricas, 
-        gracias a políticas de restricción y promoción del transporte público.</p>
+      <article class="card">
+        <h3>🚗 Vehículo Privado</h3>
+        <p>El uso de automóviles en zonas céntricas se redujo un <strong>20 %</strong> gracias a políticas verdes.</p>
       </article>
-    </div>
-
-    <div style="text-align:center;margin-top:2rem;">
-      <a href="#inicio" 
-         style="display:inline-block;color:#2563eb;text-decoration:none;font-weight:500;
-                padding:0.6rem 1.2rem;border:1px solid #2563eb;border-radius:8px;transition:all 0.3s ease;">
-        ↑ Volver al inicio
-      </a>
     </div>
   </section>
 
-  <!-- OBJETIVOS -->
   <section id="objetivos">
     <h2>Objetivos del Proyecto</h2>
     <div class="grid">
@@ -390,12 +261,10 @@ l<!doctype html>
         <h3>🌱 Sostenibilidad</h3>
         <p>Promover hábitos de transporte ecológicos y reducir la huella de carbono urbana.</p>
       </article>
-
       <article class="card">
         <h3>📊 Análisis de Datos</h3>
-        <p>Utilizar información en tiempo real para mejorar la planificación y gestión del tráfico.</p>
+        <p>Utilizar datos en tiempo real para mejorar la planificación y gestión del tráfico.</p>
       </article>
-
       <article class="card">
         <h3>🤝 Comunidad</h3>
         <p>Fomentar la participación ciudadana en la toma de decisiones sobre movilidad.</p>
@@ -403,48 +272,34 @@ l<!doctype html>
     </div>
   </section>
 
-  <!-- CONTACTO -->
+  <!-- CONTACTO con Google Forms -->
   <section id="contacto">
-    <h2>Contacto</h2>
-    <div class="contact-wrap">
-      <div class="contact-info">
-        <h3>¿Tienes sugerencias o datos para compartir?</h3>
-        <p>
-          Usa este formulario para enviarnos observaciones, propuestas o datos relevantes
-          sobre movilidad en Barcelona.
-        </p>
-        <p style="font-size:.95rem;color:var(--muted)">Tiempo de respuesta estimado: 3-5 días laborables.</p>
-      </div>
+    <h2 style="text-align:center;">Contacto</h2>
+    <p style="max-width:700px;margin:0 auto 1.5rem auto;text-align:center;color:#444;">
+      Envíanos tus sugerencias o datos sobre movilidad urbana en Barcelona a través del siguiente formulario.
+    </p>
 
-      <form class="contact-form" action="#" method="POST" novalidate>
-        <div class="field">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
-        </div>
-        <div class="field">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
-        </div>
-        <div class="field">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje..." required></textarea>
-        </div>
-        <div class="actions">
-          <button type="reset">Limpiar</button>
-          <button type="submit">Enviar</button>
-        </div>
-      </form>
+    <div style="display:flex;justify-content:center;">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLScrs_dkaWNE_f--F04dB2KQ8EvBlZR8taOAWPwOzhZXTDcruw/viewform?embedded=true"
+        width="640" 
+        height="900" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0"
+        style="border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.1);background:white;">
+        Cargando…
+      </iframe>
     </div>
   </section>
 
   <footer>
-    © <span id="year"></span> Proyecto de Movilidad — Fuente de datos: Open Data, Kaggle, Ayuntamiento de Barcelona, TMB y Bicing. | Desarrollado por <strong>David Cortés y Jaqueline Caballero</strong>.
+    © <span id="year"></span> Proyecto de Movilidad — Fuente de datos: Open Data BCN, Kaggle, Ayuntamiento de Barcelona, TMB y Bicing. | Desarrollado por <strong>David Cortés y Jaqueline Caballero</strong>.
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Efecto fade-in del dashboard
     document.addEventListener('DOMContentLoaded', () => {
       const iframeContainer = document.querySelector('.iframe-wrapper');
       const observer = new IntersectionObserver(entries => {
@@ -460,5 +315,3 @@ l<!doctype html>
   </script>
 </body>
 </html>
-
-
